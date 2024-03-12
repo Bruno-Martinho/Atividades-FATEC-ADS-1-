@@ -53,3 +53,11 @@ SELECT Nome, Sexo, Salário FROM Funcionário;
 SELECT Nome, Salário FROM Funcionário WHERE Salário > 2000;
 
 SELECT Nome, Sexo FROM Funcionário UNION SELECT Nome, Sexo FROM Aluno;
+
+SELECT Nome, Sexo FROM Funcionário INTERSECT Nome, Sexo FROM Aluno;
+
+SELECT Nome, Sexo FROM Funcionário EXCEPT Nome, Sexo FROM Aluno;
+
+SELECT Funcionário.Nome AS nome_funcionario, Departamento.Nome AS departamento_funcionario FROM Funcionário, Departamento;
+
+SELECT Funcionário.Nome AS nome_funcionario, Departamento.Nome AS departamento_funcionario FROM Funcionário JOIN Departamento ON Funcionário.Departamento = Departamento.Cod;
