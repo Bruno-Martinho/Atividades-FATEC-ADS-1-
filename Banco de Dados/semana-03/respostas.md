@@ -84,7 +84,6 @@ WHERE JOGADOR.PSEUDONIMO = NIVEL. NOMEPSEUD ORDER BY NIVEL. BONUS ASC
 ## Aplicação do exercício 30
 
 ```sql
-[sábado 09:12] RUAN DEFAVARI GODOI
 create database if not exists Exercicio30;
  
 use Exercicio30;
