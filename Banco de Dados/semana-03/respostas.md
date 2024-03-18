@@ -80,3 +80,68 @@ INNER JOIN Secao ON Participacao.idSecao=Secao.idSecao;
 SELECT NOME, PONTOS FROM JOGADOR, NIVEL
 WHERE JOGADOR.PSEUDONIMO = NIVEL. NOMEPSEUD ORDER BY NIVEL. BONUS ASC
 ```
+
+## Aplicação do exercício 30
+
+```sql
+[sábado 09:12] RUAN DEFAVARI GODOI
+create database if not exists Exercicio30;
+ 
+use Exercicio30;
+ 
+create table if not exists JOGADOR (
+
+	PSEUDONIMO VARCHAR(10) NOT NULL,
+
+    NOME VARCHAR(25) NOT NULL,
+
+    SENHA VARCHAR(3) NOT NULL,
+
+    PRIMARY KEY(PSEUDONIMO));
+ 
+create table if not exists NIVEL ( 
+
+NIVEL NUMERIC(3) NOT NULL,
+
+NOMEPSEUD VARCHAR(10) NOT NULL,
+
+PONTOS NUMERIC(5) NOT NULL,
+
+BONUS NUMERIC(5) NOT NULL,
+
+PRIMARY KEY(NIVEL, NOMEPSEUD),
+
+foreign key (NOMEPSEUD) references JOGADOR(PSEUDONIMO));
+ 
+insert into JOGADOR(PSEUDONIMO, NOME, SENHA) values
+
+("Biel", "Gabriel", "374"),
+
+("Ray", "Rayane", "981"),
+
+("Babi", "Barbara", "7U9"),
+
+("Gigi", "Giovanni", "4FV"),
+
+("Thi", "Thiago", "J9A");
+ 
+insert into NIVEL(NIVEl, NOMEPSEUD, PONTOS, BONUS) values 
+
+(15, "Ray", 170, 33),
+
+(27, "Gigi", 210, 40),
+
+(8, "Biel", 90, 5),
+
+(12, "Thi", 145, 26),
+
+(39, "Babi", 421, 54);
+ 
+select * from NIVEL;
+ 
+select NOME, PONTOS FROM JOGADOR, NIVEL WHERE JOGADOR.PSEUDONIMO = NIVEL.NOMEPSEUD ORDER BY NIVEL.BONUS ASC;
+
+drop table NIVEL;
+ 
+drop table JOGADOR;
+```
