@@ -71,6 +71,71 @@ SELECT Deputado.nomeDeputado, Secao.dataSecao FROM Deputado
 INNER JOIN Participacao ON Deputado.idDeputado = Participacao.idDeputado
 INNER JOIN Secao ON Participacao.idSecao=Secao.idSecao;
 ```
+## Aplicação do exercício 19
+```sql
+create database if not exists Exercicio19;
+ 
+use Exercicio19;
+ 
+create table if not exists Partido (
+idPartido int not null,
+        siglaPartido varchar(45) not null,
+        descricaoPartido varchar(45) not null,
+        primary key(idPartido));
+ 
+create table if not exists Deputado (
+idPartido int not null,
+        nomeDeputado varchar(60) not null,
+        primary key(idPartido),
+        foreign key(idPartido) references Partido(idPartido));
+ 
+create table if not exists Participacao (
+idSecao int not null,
+        idDeputado int null,
+        primary key (idSecao, idDeputado),
+        foreign key(idSecao) references Deputado(idPartido),
+        foreign key(idDeputado) references Deputado(idPartido));
+ 
+create table if not exists Secao (
+idSecao int not null,
+dataSecao date not null,
+horasecao time not null,
+decisao varchar(2000) not null,
+        foreign key(idSecao) references Participacao(idSecao));
+        
+insert into Partido(idPartido, siglaPartido, descricaoPartido) values
+(1, "MDB", "Movimento Democrático Brasileiro"),
+(2, "PSB", "Partido Socialista Brasileiro"),
+(3, "PSOL", "rtido Socialismo E Liberdade"),
+(4, "PT", " Partido dos Trabalhadores"),
+(5, "PL", "Partido Liberal");
+ 
+insert into Deputado(idPartido, nomeDeputado) values
+(2, "Eduardo Bandeira de Mello"),
+(5, "Carla Zambelli"),
+(1, "Célio Silveira "),
+(3, "Guilherme Cortez"),
+(4, "Benedita da Silva");
+ 
+insert into Participacao(idSecao, idDeputado) values
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
+ 
+insert into Secao(idSecao, dataSecao, horasecao, decisao) values
+(1, curdate(), "13:40", "decisão alternativa"),
+(2, curdate(), "11:58", "decisão alternativa"),
+(3, curdate(), "12:30", "decisão alternativa"),
+(4, curdate(), "18:10", "decisão alternativa"),
+(5, curdate(), "21:06", "decisão alternativa");
+ 
+select Deputado.nomeDeputado, Secao.dataSecao
+from Deputado
+INNER JOIN Participacao ON Deputado.idPartido = Participacao.idDeputado
+INNER JOIN Secao ON Participacao.idSecao = Secao.idSecao;
+```
 
 ## Exercício 30
 
@@ -145,68 +210,4 @@ drop table NIVEL;
 drop table JOGADOR;
 ```
 
-## Aplicação do exercício 19
-```sql
-create database if not exists Exercicio19;
- 
-use Exercicio19;
- 
-create table if not exists Partido (
-idPartido int not null,
-        siglaPartido varchar(45) not null,
-        descricaoPartido varchar(45) not null,
-        primary key(idPartido));
- 
-create table if not exists Deputado (
-idPartido int not null,
-        nomeDeputado varchar(60) not null,
-        primary key(idPartido),
-        foreign key(idPartido) references Partido(idPartido));
- 
-create table if not exists Participacao (
-idSecao int not null,
-        idDeputado int null,
-        primary key (idSecao, idDeputado),
-        foreign key(idSecao) references Deputado(idPartido),
-        foreign key(idDeputado) references Deputado(idPartido));
- 
-create table if not exists Secao (
-idSecao int not null,
-dataSecao date not null,
-horasecao time not null,
-decisao varchar(2000) not null,
-        foreign key(idSecao) references Participacao(idSecao));
-        
-insert into Partido(idPartido, siglaPartido, descricaoPartido) values
-(1, "MDB", "Movimento Democrático Brasileiro"),
-(2, "PSB", "Partido Socialista Brasileiro"),
-(3, "PSOL", "rtido Socialismo E Liberdade"),
-(4, "PT", " Partido dos Trabalhadores"),
-(5, "PL", "Partido Liberal");
- 
-insert into Deputado(idPartido, nomeDeputado) values
-(2, "Eduardo Bandeira de Mello"),
-(5, "Carla Zambelli"),
-(1, "Célio Silveira "),
-(3, "Guilherme Cortez"),
-(4, "Benedita da Silva");
- 
-insert into Participacao(idSecao, idDeputado) values
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5);
- 
-insert into Secao(idSecao, dataSecao, horasecao, decisao) values
-(1, curdate(), "13:40", "decisão alternativa"),
-(2, curdate(), "11:58", "decisão alternativa"),
-(3, curdate(), "12:30", "decisão alternativa"),
-(4, curdate(), "18:10", "decisão alternativa"),
-(5, curdate(), "21:06", "decisão alternativa");
- 
-select Deputado.nomeDeputado, Secao.dataSecao
-from Deputado
-INNER JOIN Participacao ON Deputado.idPartido = Participacao.idDeputado
-INNER JOIN Secao ON Participacao.idSecao = Secao.idSecao;
-```
+
