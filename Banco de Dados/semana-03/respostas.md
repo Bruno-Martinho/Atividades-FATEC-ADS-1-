@@ -24,6 +24,50 @@
 
 **D)** `Estudante(10, 'jsilva@ig.com.br', 1, 50);` `FonePessoa(1, '019', '2761', '1370')`
 
+## Aplicação do exercício 23
+
+```sql
+create database if not exists Exercicio23;
+use Exercicio23;
+ 
+create table if not exists Pessoa(
+	IdPessoa 		int primary key auto_increment,
+    Nome			varchar (40),
+    Endereco		varchar(40)
+); 
+select * from Pessoa;
+ 
+create table if not exists FonePessoa(
+	IdPessoa		int primary key auto_increment,
+    DDD				varchar(3),
+    Prefixo			char(4),
+    Nro				char(4),
+    foreign key(IdPessoa) references Pessoa(IdPessoa)
+);
+ 
+create table if not exists Republica(
+	IdRep			int primary key auto_increment,
+    Nome			varchar(30),
+    Endereco		varchar(40)
+);
+SELECT * FROM Republica;
+ 
+create table if not exists Estudante(
+	RA				int primary key auto_increment,
+    Email			varchar(30),
+    IdPessoa		int,
+    IdRep			int,
+    foreign key(IdPessoa) references Pessoa(IdPessoa),
+    foreign key(IdRep) references Republica(IdRep)
+);
+ 
+INSERT INTO Pessoa (Nome, Endereco)
+VALUES ("José Silva", "Rua 1, 20");
+ 
+INSERT INTO Republica values (20, "Várzea", "Rua Chaves, 2001");
+```
+
+
 ## Verdadeiro e falso 3
 
 | Afirmação                                                                                                                                                                                  | Resposta |
